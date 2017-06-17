@@ -9,35 +9,17 @@
  * <bitbar.desc>Shopify Admin Plugin for BitBar</bitbar.desc>
  * <bitbar.dependencies>node</bitbar.dependencies>
  *
- *
- * Usage: 
- * 
- * For every Shopify shop you want to add run initAdmin() function once with parameters
- * 
- * initAdmin('example.com', 'example.myshopify.com', 'example.com_api_key', 'example.com_password');
- * initAdmin('example-2.com', 'example-2.myshopify.com', 'example-2.com_api_key', 'example-2.com_password');
- * ...
- * 
- * For details 
- * 
- *
- *
  */
+ 
 
 // Variables
 var admin = Object();
 
-/* Site configuration */
+/* Shopibar configuration */
 admin.myShopifyAccountName = 'example.myshopify.com';
 admin.apiKey = 'example.com_api_key';
 admin.password = 'example.com_password';
-/* End of site configuration  */
-
-/* Site configuration */
-admin.myShopifyAccountName = 'codejective.myshopify.com';
-admin.apiKey = 'ad042476518560d7fb6237e1ffc920c2';
-admin.password = '5815af34cd5bc9541ebacf67ec65068d';
-/* End of site configuration  */
+/* End of Shopibar configuration  */
 
 var verbose = true;
 
