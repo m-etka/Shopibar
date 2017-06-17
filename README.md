@@ -1,4 +1,4 @@
-# Shopibar
+# 🛒 Shopibar
 Shopify Admin Plugin for [Bitbar](https://github.com/matryer/bitbar#-bitbar--)
 
 
