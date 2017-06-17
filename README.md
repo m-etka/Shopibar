@@ -9,7 +9,7 @@ Shopify Admin Plugin for [Bitbar](https://github.com/matryer/bitbar#-bitbar--)
 
 Copy `Shopibar.15m.js` file to your BitBar plugins directory. For details click [here](https://github.com/matryer/bitbar#installing-plugins).
 
-Do not forget to give necessarry permissions using
+Do not forget to give necessary permissions using
 `chmod +x Shopibar.15m.js`
 
 Shopibar plug-in uses Shopify Admin API. In order to use the plug-in you need to create a `Private App` in Shopify Admin page. Visit `yourShopName.myshopify.com/admin/apps/private` to create an app. 
