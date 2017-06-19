@@ -2,7 +2,7 @@
 
 /*
  * <bitbar.title>Shopibar</bitbar.title>
- * <bitbar.version>v1.0</bitbar.version>
+ * <bitbar.version>v1.0.1</bitbar.version>
  * <bitbar.author>Etka Özdemir</bitbar.author>
  * <bitbar.author.github>m-etka</bitbar.author.github>
  * <bitbar.image>http://imgur.com/a/KJIEO</bitbar.image>
@@ -10,7 +10,7 @@
  * <bitbar.dependencies>node</bitbar.dependencies>
  *
  */
- 
+
 
 
 // Variables
