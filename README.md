@@ -23,8 +23,10 @@ Shopibar private app needs following permission (Read Access):
 
 
 ## Version History
+
 ### v1.0.1
-- Fix: Total order price ([issue(https://github.com/m-etka/Shopibar/issues/1)])
+- Fix: Total order price ([issue #1](https://github.com/m-etka/Shopibar/issues/1))
+
 ### v1.0
 - Shows customer count
 - Shows pending orders with details
