@@ -12,6 +12,7 @@
  */
  
 
+
 // Variables
 var admin = Object();
 
@@ -50,7 +51,7 @@ get(admin, 'shop', function(data) {
         printBitBarLine(data.orders.length, ['color=black', 'font=Calibri', 'size=16']);
         for (var i = 0; i < data.orders.length; i++) {
             // Show order price and user info
-            printBitBarLine('--$' + data.orders[i].total_price_usd, ['color=black', 'font=Calibri', 'size=16']);
+            printBitBarLine('--$' + data.orders[i].total_line_items_price, ['color=black', 'font=Calibri', 'size=16']);
             printBitBarLine('--' + data.orders[i].email, ['font=Calibri', 'size=14']);
             // Show items ordered
             for (var j = 0; j < data.orders[i].line_items.length; j++) {
