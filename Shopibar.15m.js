@@ -5,21 +5,26 @@
  * <bitbar.version>v1.0.1</bitbar.version>
  * <bitbar.author>Etka Özdemir</bitbar.author>
  * <bitbar.author.github>m-etka</bitbar.author.github>
- * <bitbar.image>http://imgur.com/a/KJIEO</bitbar.image>
+ * <bitbar.image>http://i.imgur.com/Dt499Nh.png</bitbar.image>
  * <bitbar.desc>Shopify Admin Plugin for BitBar</bitbar.desc>
  * <bitbar.dependencies>node</bitbar.dependencies>
  *
  */
 
+/*
+ * Visit http://shopibar.etka.org for installation and details
+ */
 
-
-// Variables
-var admin = Object();
 
 /* Shopibar configuration */
-admin.myShopifyAccountName = 'example.myshopify.com';
-admin.apiKey = 'example.com_api_key';
-admin.password = 'example.com_password';
+var admin = {
+    myShopifyAccountName: 'example.myshopify.com',
+    apiKey: 'example.com_api_key',
+    password: 'example.com_password'
+};
+showCustomerCount = true;
+showPendingOrders = true;
+showUnshippedOrders = true;
 /* End of Shopibar configuration  */
 
 var verbose = true;
@@ -35,49 +40,66 @@ get(admin, 'shop', function(data) {
     // Show shop info
     printBitBarLine(data.shop.name, ['color=black', 'font=Calibri', 'size=18']);
 
-    // Get customer count
-    get(admin, 'customerCount', function(data) {
-        // Show customer count
-        printBitBarLine('Customer Count:', ['color=gray', 'font=Calibri', 'size=14']);
-        printBitBarLine(data.count, ['color=black', 'font=Calibri', 'size=16']);
+    if (showCustomerCount) {
+        // Get customer count
+        get(admin, 'customerCount', function(data) {
+            // Show customer count
+            printBitBarLine('Customer Count:', ['color=gray', 'font=Calibri', 'size=14']);
+            printBitBarLine(data.count, ['color=black', 'font=Calibri', 'size=16']);
+        });
+    }
 
-    });
+    if (showPendingOrders) {
+        // Get pending orders
+        get(admin, 'pendingOrders', function(data) {
+            printOrders(data, 'Pending Orders');
+        });
+    }
 
-    // Get pending orders
-    get(admin, 'pendingOrders', function(data) {
-        // Show pending orders
-        printBitBarLine(' ');
-        printBitBarLine('Pending Orders:', ['color=gray', 'font=Calibri', 'size=14']);
-        printBitBarLine(data.orders.length, ['color=black', 'font=Calibri', 'size=16']);
-        for (var i = 0; i < data.orders.length; i++) {
-            // Show order price and user info
-            printBitBarLine('--$' + data.orders[i].total_line_items_price, ['color=black', 'font=Calibri', 'size=16']);
-            printBitBarLine('--' + data.orders[i].email, ['font=Calibri', 'size=14']);
-            // Show items ordered
-            for (var j = 0; j < data.orders[i].line_items.length; j++) {
-                if (j != 0) {
-                    printBitBarLine('----');
-                }
-                printBitBarLine('----' + data.orders[i].line_items[j].title, ['font=Calibri', 'size=16', 'color=black']);
+    if (showUnshippedOrders) {
+        // Get unshipped orders
+        get(admin, 'unshippedOrders', function(data) {
+            printOrders(data, 'Unshipped Orders');
+        });
+    }
+
+});
+
+// Print order details
+function printOrders(data, title) {
+    // Show orders
+    printBitBarLine(' ');
+    printBitBarLine(title + ':', ['color=gray', 'font=Calibri', 'size=14']);
+    printBitBarLine(data.orders.length, ['color=black', 'font=Calibri', 'size=16']);
+    for (var i = 0; i < data.orders.length; i++) {
+        // Show order price and user info
+        printBitBarLine('--$' + data.orders[i].total_line_items_price, ['color=black', 'font=Calibri', 'size=16']);
+        printBitBarLine('--' + data.orders[i].email, ['font=Calibri', 'size=14']);
+        // Show items ordered
+        for (var j = 0; j < data.orders[i].line_items.length; j++) {
+            if (j !== 0) {
                 printBitBarLine('----');
-                printBitBarLine('----Name     : ' + data.orders[i].line_items[j].name, ['font=Monaco', 'size=11']);
-                printBitBarLine('----SKU      : ' + data.orders[i].line_items[j].sku, ['font=Monaco', 'size=11']);
-                printBitBarLine('----Price    : $' + data.orders[i].line_items[j].price, ['font=Monaco', 'size=11']);
-                printBitBarLine('----Quantity : ' + data.orders[i].line_items[j].quantity, ['font=Monaco', 'size=11']);
-
             }
-            printBitBarLine('-----');
+            printBitBarLine('----' + data.orders[i].line_items[j].title, ['font=Calibri', 'size=16', 'color=black']);
+            printBitBarLine('----');
+            printBitBarLine('----Name     : ' + data.orders[i].line_items[j].name, ['font=Monaco', 'size=11']);
+            printBitBarLine('----SKU      : ' + data.orders[i].line_items[j].sku, ['font=Monaco', 'size=11']);
+            printBitBarLine('----Price    : $' + data.orders[i].line_items[j].price, ['font=Monaco', 'size=11']);
+            printBitBarLine('----Quantity : ' + data.orders[i].line_items[j].quantity, ['font=Monaco', 'size=11']);
 
         }
+        printBitBarLine('-----');
 
-    });
-
-})
+    }
+}
 
 
 // Get
 function get(admin, requestName, callback) {
-    var endpoint = Object();
+    var endpoint = {
+        url: '',
+        requestType: 'GET'
+    };
     switch (requestName) {
         case 'shop':
             endpoint.url = '/admin/shop.json';
@@ -91,6 +113,10 @@ function get(admin, requestName, callback) {
             endpoint.url = '/admin/orders.json?status=pending';
             endpoint.requestType = 'GET';
             break;
+        case 'unshippedOrders':
+            endpoint.url = '/admin/orders.json?fulfillment_status=unshipped';
+            endpoint.requestType = 'GET';
+            break;
         default:
             break;
     }
@@ -100,7 +126,7 @@ function get(admin, requestName, callback) {
         } else {
             callback(data);
         }
-    })
+    });
 
 }
 
