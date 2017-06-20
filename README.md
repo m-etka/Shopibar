@@ -24,6 +24,9 @@ Shopibar private app needs following permission (Read Access):
 
 ## Version History
 
+### v1.0.2
+- New: Options for turning on/off of visibility for pending orders, unshipped orders and customer count
+
 ### v1.0.1
 - Fix: Total order price ([issue #1](https://github.com/m-etka/Shopibar/issues/1))
 

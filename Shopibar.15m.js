@@ -2,7 +2,7 @@
 
 /*
  * <bitbar.title>Shopibar</bitbar.title>
- * <bitbar.version>v1.0.1</bitbar.version>
+ * <bitbar.version>v1.0.2</bitbar.version>
  * <bitbar.author>Etka Özdemir</bitbar.author>
  * <bitbar.author.github>m-etka</bitbar.author.github>
  * <bitbar.image>http://i.imgur.com/Dt499Nh.png</bitbar.image>
